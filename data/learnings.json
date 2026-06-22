@@ -1,13 +1,62 @@
 {
-  "last_run": null,
-  "total_runs": 0,
-  "queries_that_produced_results": [],
-  "queries_that_produced_nothing": [],
-  "best_source_domains": [],
+  "last_run": "2026-06-22",
+  "total_runs": 1,
+  "queries_that_produced_results": [
+    "DJI new product drone camera launch June 2026",
+    "DJI patent lawsuit Insta360 Luna Ultra 2026",
+    "GoPro product update strategy 2026",
+    "GoPro MISSION 1 PRO launch review June 2026",
+    "visionOS 26 Insta360 GoPro 360 video native support WWDC 2025",
+    "DJI Avata 360 drone announcement 2026",
+    "DJI Osmo Pocket 4 Pro launch June 2026",
+    "YouTube creator innovative video technique format 2026",
+    "YouTube Neal Mohan 2026 creator letter video format",
+    "YouTube Shorts 200 billion views creator economy platform shift 2026",
+    "TikTok viral video format trend creator technique June 2026",
+    "Insta360 Luna Ultra camera launch June 2026 review"
+  ],
+  "queries_that_produced_nothing": [
+    "brand UGC campaign action camera creator 2026 -- only generic UGC platform articles",
+    "Nothing phone 3 camera technology June 2026 -- product launched July/August 2025, no fresh news",
+    "vertical video short-form production technique brand campaign June 2026 -- only generic trend roundups",
+    "camera brand creator sponsored content deal notable campaign June 2026 DJI GoPro -- no specific campaign stories"
+  ],
+  "best_source_domains": [
+    "petapixel.com",
+    "dronexl.co",
+    "dronedj.com",
+    "redsharknews.com",
+    "ymcinema.com",
+    "nofilmschool.com",
+    "cined.com",
+    "digitalcameraworld.com",
+    "tubebuddy.com",
+    "blog.youtube"
+  ],
   "discovered_newsletters": [],
-  "discovered_sources": [],
-  "patterns": [],
+  "discovered_sources": [
+    "Y.M.Cinema Magazine (ymcinema.com) -- strong GoPro/action camera coverage with editorial angle",
+    "DroneXL (dronexl.co) -- detailed DJI product specs and launch coverage",
+    "DroneDJ (dronedj.com) -- reliable DJI and drone industry news",
+    "RedShark News (redsharknews.com) -- good production/cinema angle on camera news",
+    "CineD (cined.com) -- professional cinema/production perspective on camera news",
+    "Newengen -- useful for TikTok trend tracking",
+    "TubeBuddy blog -- good YouTube creator news monthly roundup"
+  ],
+  "patterns": [
+    "DJI vs Insta360 patent war is a major ongoing story -- watch for court updates, injunction decisions",
+    "DJI's US regulatory exclusion is a recurring theme -- check for updates each run",
+    "GoPro MISSION 1 reviews are still publishing -- look for long-term test results",
+    "Nothing Phone 3 has no fresh camera-specific news; monitor for OS updates or camera app changes",
+    "visionOS 26 shipping in fall 2025 means spatial video content pipeline is active in 2026 -- check for creator case studies",
+    "Action camera brands converging on cinema/larger sensors -- ongoing category shift to track",
+    "YouTube Veo AI tools rollout is happening across 2026 -- watch for creator response stories",
+    "TikTok brand format trends rotate every 2-3 weeks -- check monthly for new breakout formats",
+    "PetaPixel and DroneDJ are the most reliable sources for action/drone camera news with editorial angle",
+    "WebFetch of article URLs often returns 403 -- rely on search result summaries and multiple source triangulation"
+  ],
   "feedback": [
-    "Initial run. Focus on finding strong stories across all 4 categories. Prioritize visual trends and interesting campaigns. Include production technique stories that would interest camera/imaging professionals."
+    "Initial run. Focus on finding strong stories across all 4 categories. Prioritize visual trends and interesting campaigns. Include production technique stories that would interest camera/imaging professionals.",
+    "First run completed June 22, 2026. 12 stories seeded across all 4 categories. Top stories: DJI Pocket 4P launch and DJI vs Insta360 patent war (both score 9). Freshest stories are within the 14-day window. Several stories included as first-run seeds despite being older (GoPro MISSION 1, DJI Avata 360, visionOS 26)."
   ]
 }
