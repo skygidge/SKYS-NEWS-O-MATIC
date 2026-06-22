@@ -1,0 +1,24 @@
+{
+  "web_sources": [
+    {"name": "PetaPixel", "url": "https://petapixel.com", "type": "web_check"},
+    {"name": "DPReview", "url": "https://www.dpreview.com", "type": "web_check"},
+    {"name": "The Verge - Cameras", "url": "https://www.theverge.com/cameras", "type": "web_check"},
+    {"name": "No Film School", "url": "https://nofilmschool.com", "type": "web_check"},
+    {"name": "Digital Camera World", "url": "https://www.digitalcameraworld.com", "type": "web_check"},
+    {"name": "9to5Mac", "url": "https://9to5mac.com", "type": "web_check"},
+    {"name": "DroneDJ", "url": "https://dronedj.com", "type": "web_check"}
+  ],
+  "company_blogs": [
+    {"name": "DJI Newsroom", "url": "https://newsroom.dji.com"},
+    {"name": "GoPro News", "url": "https://gopro.com/en/us/news"},
+    {"name": "Apple Newsroom", "url": "https://www.apple.com/newsroom"},
+    {"name": "Nothing News", "url": "https://nothing.tech/blogs/news"}
+  ],
+  "twitter_keywords": [
+    "@DJIGlobal", "@GoPro", "@nothing", "@Apple",
+    "@MKBHD", "@iJustine", "@PeterMcKinnon", "@Casey"
+  ],
+  "twitter_keywords_note": "These are search hints for web queries, not browseable accounts.",
+  "discovered_newsletters": [],
+  "discovered_sources": []
+}
