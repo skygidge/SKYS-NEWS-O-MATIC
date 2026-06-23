@@ -1,51 +1,56 @@
-# Style Guide — Prompt Response ICS
+# Style Guide — Sky's News-O-Matic
 
-**Name:** The Prompt Response // ICS
-**Audience:** Insta360 ICS creative studio (Shenzhen HQ + LA office)
+**Name:** Sky's News-O-Matic
+**Audience:** English-reading and speaking coworkers at Insta360 ICS creative studio
 **Language:** Bilingual English/Chinese
-**Voice:** Deadpan to mean. Informed. No winking.
+**Purpose:** Convey useful industry information. Personal, non-commercial project.
 
 ## Headlines
-- 2-3 words ideal
-- Must contain a genuine double meaning that lands without explanation
-- Both meanings must hold up under scrutiny
-- No wordplay that requires footnotes
 
-### The rule
-The word describes what the product/story literally involves. The other meaning is your editorial opinion.
+Literal and factual. Describe what the story is about.
 
-### 4-part test
-1. Does it have at least two meanings?
-2. Do both meanings relate to the story?
-3. Does it break down when you pull on it?
-4. Would the reader get it without the blurb?
+- GOOD: "DJI launches Osmo Pocket 4 Pro in China"
+- BAD: "Out of Pocket" (pun, says nothing about the subject)
+- GOOD: "GoPro files going-concern warning in Q1 earnings"
+- BAD: "Cut Rate" (pun that hides the actual news)
 
-Start with what the story is actually about. Find the word for that whose second meaning is your take. Don't start with clever wordplay and work backward.
+No puns. No double meanings. No wordplay. No 2-3 word cleverness. Write what happened.
 
-## Chinese headlines
-- English puns rarely translate — different words for each meaning
-- Don't force a translation of the English pun
-- Find a Chinese pun/phrase that works independently
-- Default to clean, sharp. Factual beats clever.
-
-## Chinese translation notes
-- Use 而 as a connector between clauses
-- Use —— (em dash) before closing phrases
-- When translating casual English, match the casual register in Chinese
-- 自动化 (automated) is harder than 省掉 (saved you from) — choose based on editorial intent
+### Chinese headlines
+- Same rule: literal and factual
+- Not a translation — write naturally in Chinese
+- GOOD: "大疆在中国发布Osmo Pocket 4 Pro"
+- BAD: "有货无缘" (vague wordplay)
 
 ## Blurbs
-- **First line:** One sentence covering who/what/where/when/how
-- **Then bullet points** using `•` (max 7):
-  - Each bullet is ONE sentence max, fragments OK
-  - At least one bullet noting why this matters for Insta360 / the camera-imaging industry
-  - End with a knife, not a summary
-- Use `\n` in JSON for line breaks
+
+One sentence in English. One sentence in Chinese.
+
+Two sentences maximum if the story absolutely requires it. That is rare.
+
+Do NOT write:
+- Bullet points
+- Multi-paragraph analysis
+- "For Insta360:" commentary
+- Editorial opinion or knife-twist endings
+
+Just state the key takeaway in one sentence.
+
+## Images
+
+Every story MUST have a working image_url. No exceptions.
+
+Priority:
+1. Article's og:image — WebFetch the source URL and extract it
+2. Wikimedia Commons — search for a relevant photo of the product, company, or topic
+3. Web image search — last resort
+
+This is personal/non-commercial. All image use is protected.
 
 ## What NOT to write
-- No "This changes everything" hype
-- No influencer voice ("X just dropped Y and it's insane")
-- No hedging ("It remains to be seen...")
+- No hype
+- No influencer voice
+- No hedging
 - No corporate PR restatements
-- No emoji. Ever.
+- No emoji
 - Never invent product names or features
