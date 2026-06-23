@@ -12,10 +12,10 @@ This runs as a **Claude Code Routine**. No API keys. No extra costs. Uses your e
 
 ## GitHub Repo Setup
 
-Public repo: `github.com/skygidge/prompt-response-ics`
+Public repo: `github.com/skygidge/SKYS-NEWS-O-MATIC`
 
 ```
-prompt-response-ics/
+SKYS-NEWS-O-MATIC/
 ├── data/
 │   ├── focus.md                      # YOUR STEERING FILE
 │   ├── style-guide.md                # Writing voice, headline rules
@@ -50,7 +50,7 @@ git pull origin main
 Fetch open guidance issues:
 
 ```bash
-curl -s "https://api.github.com/repos/skygidge/prompt-response-ics/issues?state=open&per_page=20" \
+curl -s "https://api.github.com/repos/skygidge/SKYS-NEWS-O-MATIC/issues?state=open&per_page=20" \
   -H "Accept: application/vnd.github+json" \
   > /tmp/guidance_issues.json
 
@@ -65,12 +65,12 @@ print(f'Found {len(nums)} open guidance issue(s): {nums}')
 
 ## STEP 1 -- Load Context (WebFetch each URL)
 
-- **Focus file (READ FIRST):** https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/focus.md
-- Style guide: https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/style-guide.md
-- Exclusion list: https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/exclusion_list.json
-- Previous results: https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/results/all_stories.json
-- Learnings + feedback: https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/learnings.json
-- Sources config: https://raw.githubusercontent.com/skygidge/prompt-response-ics/main/data/sources.json
+- **Focus file (READ FIRST):** https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/focus.md
+- Style guide: https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/style-guide.md
+- Exclusion list: https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/exclusion_list.json
+- Previous results: https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/results/all_stories.json
+- Learnings + feedback: https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/learnings.json
+- Sources config: https://raw.githubusercontent.com/skygidge/SKYS-NEWS-O-MATIC/main/data/sources.json
 
 **The focus file is the boss.** Follow it before anything else.
 
@@ -221,7 +221,7 @@ Create `data/results/digest_YYYY-MM-DD.md`:
 **Queries that worked:** "DJI new drone 2026", "YouTube creator technique"
 **Queries that found nothing:** "Nothing phone camera update"
 **Notes:** PetaPixel had strong DJI coverage.
-**View stories:** https://skygidge.github.io/prompt-response-ics/
+**View stories:** https://skygidge.github.io/SKYS-NEWS-O-MATIC/
 ```
 
 ## STEP 7 -- Update Learnings
