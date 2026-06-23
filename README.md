@@ -2,7 +2,7 @@
 
 Industry news feed for Insta360 ICS creative studio. Auto-sourced. Human-curated.
 
-**Website:** https://skygidge.github.io/prompt-response-ics/
+**Website:** https://skygidge.github.io/SKYS-NEWS-O-MATIC/
 
 ## Categories
 
