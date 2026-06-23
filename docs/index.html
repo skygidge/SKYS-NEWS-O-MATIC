@@ -1,731 +1,359 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Prompt Response // ICS</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sky's News-o-matic</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Newsreader:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:#FAFAF8;color:#1a1a1a;font-family:'JetBrains Mono',monospace}
+::selection{background:#1a1a1a;color:#FAFAF8}
 
-  :root {
-    --bg: #FAFAF8;
-    --ink: #1a1a1a;
-    --ink-light: #666;
-    --ink-lighter: #999;
-    --rule: #d0cfc9;
-    --orange: #e67e22;
-    --mono: 'JetBrains Mono', monospace;
-    --serif: 'Newsreader', Georgia, serif;
-    --cat-visual-trends: #e74c3c;
-    --cat-campaigns: #3498db;
-    --cat-production: #2ecc71;
-    --cat-creator-study: #9b59b6;
-  }
+.header{position:sticky;top:0;z-index:20;background:rgba(250,250,248,0.9);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid #e6e2d8}
+.header-inner{max-width:780px;margin:0 auto;padding:18px 24px 14px}
+.header-top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+.title{font-size:21px;font-weight:800;letter-spacing:-0.01em;line-height:1.05}
+.subtitle{font-family:'Newsreader',serif;font-size:14.5px;font-style:italic;color:#6b6760;margin-top:5px}
+.meta{flex:none;display:flex;align-items:center;gap:14px;font-size:10.5px;letter-spacing:0.1em;color:#a8a39a;text-transform:uppercase;padding-top:4px}
+.meta-sep{color:#d8d3c8}
 
-  body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--serif);
-    font-size: 16px;
-    line-height: 1.6;
-  }
+.pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:15px;align-items:center}
+.pill{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.04em;padding:5px 12px;border-radius:999px;cursor:pointer;transition:all .12s;border:1px solid #d8d3c8;background:transparent;color:#6b6760}
+.pill:hover{border-color:#999}
+.pill.on{color:#fff}
+.spacer{flex:1}
 
-  header {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    background: var(--bg);
-    border-bottom: 2px solid var(--ink);
-    padding: 10px 20px 8px;
-  }
+.sel-bar{display:none;align-items:center;gap:9px}
+.sel-bar.show{display:flex}
+.sel-count{font-size:10.5px;letter-spacing:0.08em;color:#ff7a00;text-transform:uppercase;font-weight:700}
+.copy-btn{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FAFAF8;background:#ff7a00;border:none;padding:5px 11px;border-radius:3px;cursor:pointer}
 
-  .header-top {
-    display: flex;
-    align-items: baseline;
-    gap: 16px;
-    flex-wrap: wrap;
-    margin-bottom: 6px;
-  }
+main{max-width:780px;margin:0 auto;padding:0 24px}
 
-  .site-title {
-    font-family: var(--mono);
-    font-size: 15px;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-    white-space: nowrap;
-  }
+.sec-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.sec-head h2{margin:0;font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase}
+.rule{flex:1;height:1px;background:#e6e2d8}
 
-  .site-subtitle {
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 12px;
-    color: var(--ink-light);
-  }
+.card{position:relative;background:#fff;border:1px solid #ece9e2;border-radius:2px;padding:18px 22px 20px;margin-bottom:14px;transition:border-color .15s,background .15s}
+.card.used{background:#fffaf4;border-color:#ff7a00}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.card-left{min-width:0;flex:1}
+.kicker{font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase}
+.hl{display:inline-block;font-size:18px;font-weight:700;letter-spacing:-0.01em;color:#1a1a1a;line-height:1.22;margin-top:5px;text-decoration:none}
+.hl:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.star{color:#e0a92b}
+.src{font-size:10.5px;letter-spacing:0.06em;color:#a8a39a;text-transform:uppercase;margin-top:7px}
+.ctrls{flex:none;display:flex;align-items:center;gap:10px;padding-top:2px}
+.new{font-size:9px;font-weight:800;letter-spacing:0.12em;color:#fff;background:#1a1a1a;padding:2px 6px;border-radius:3px}
+.chk{cursor:pointer;flex:none;display:inline-block;width:20px;height:20px;border-radius:3px;border:1.5px solid #cfcabf;background:#fff;color:#fff;font-size:13px;line-height:17px;text-align:center;font-weight:700;transition:all .12s}
+.chk.on{border-color:#ff7a00;background:#ff7a00}
+.blurb-en{font-family:'Newsreader',serif;font-size:16px;line-height:1.55;color:#2b2b28;margin:11px 0 0;text-wrap:pretty}
+.blurb-zh{font-family:'Newsreader',serif;font-size:14.5px;line-height:1.6;color:#8a857c;margin:7px 0 0;text-wrap:pretty}
+.read{display:inline-flex;align-items:center;gap:5px;margin-top:13px;font-size:11px;font-weight:700;letter-spacing:0.04em;color:#1a1a1a;text-decoration:none}
+.read:hover{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+.read .arr{color:#b8b2a6}
 
-  .header-meta {
-    margin-left: auto;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-light);
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
+.arch-toggle{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;padding:0;cursor:pointer;text-align:left;font-family:'JetBrains Mono',monospace}
+.arch-toggle h2{margin:0;font-size:12px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#8a857c}
+.arch-n{font-size:10.5px;color:#a8a39a}
+.arch-c{font-size:11px;color:#a8a39a}
+.arch-list{margin-top:18px;opacity:0.66}
 
-  .lang-toggle {
-    display: flex;
-    gap: 0;
-    font-family: var(--mono);
-    font-size: 11px;
-    border: 1px solid var(--ink);
-  }
+.sug{margin-top:42px;border:1px solid #e6e2d8;border-radius:4px;background:#fff;padding:22px 24px 24px}
+.sug-head{display:flex;align-items:center;gap:9px}
+.sug-head span{font-size:13px}
+.sug-head h2{margin:0;font-size:12px;font-weight:800;letter-spacing:0.14em;text-transform:uppercase}
+.sug-desc{font-family:'Newsreader',serif;font-style:italic;font-size:14.5px;color:#6b6760;margin:9px 0 13px}
+.sug-ta{width:100%;min-height:88px;resize:vertical;font-family:'JetBrains Mono',monospace;font-size:13px;line-height:1.5;color:#1a1a1a;background:#FAFAF8;border:1px solid #d8d3c8;border-radius:3px;padding:12px 13px}
+.sug-ta:focus{outline:none;border-color:#1a1a1a}
+.sug-actions{display:flex;align-items:center;gap:13px;margin-top:12px}
+.sug-btn{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#FAFAF8;background:#1a1a1a;border:none;padding:9px 16px;border-radius:3px;cursor:pointer}
+.sug-status{font-size:11.5px;color:#a8a39a;font-family:'Newsreader',serif;font-style:italic}
 
-  .lang-btn {
-    padding: 2px 8px;
-    cursor: pointer;
-    background: none;
-    border: none;
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-light);
-    transition: background 0.15s, color 0.15s;
-  }
+footer{max-width:780px;margin:46px auto 0;padding:20px 24px 0;border-top:1px solid #e6e2d8;text-align:center}
+footer div{font-size:10.5px;letter-spacing:0.1em;text-transform:uppercase;color:#b8b2a6}
 
-  .lang-btn.active {
-    background: var(--ink);
-    color: var(--bg);
-  }
+.empty{font-family:'Newsreader',serif;font-style:italic;color:#a8a39a;padding:24px 0;font-size:15px}
+.hidden{display:none}
 
-  .header-controls {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-
-  .filter-pills {
-    display: flex;
-    gap: 5px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-
-  .pill {
-    font-family: var(--mono);
-    font-size: 10px;
-    padding: 2px 8px;
-    border-radius: 2px;
-    cursor: pointer;
-    border: 1px solid transparent;
-    transition: opacity 0.15s;
-    color: #fff;
-    user-select: none;
-  }
-
-  .pill[data-cat="all"] { background: var(--ink); color: var(--bg); }
-  .pill[data-cat="visual_trends"] { background: var(--cat-visual-trends); }
-  .pill[data-cat="campaigns"] { background: var(--cat-campaigns); }
-  .pill[data-cat="production"] { background: var(--cat-production); }
-  .pill[data-cat="creator_study"] { background: var(--cat-creator-study); }
-
-  .pill.inactive { opacity: 0.35; }
-
-  .selected-badge {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--orange);
-    display: none;
-    white-space: nowrap;
-  }
-
-  .copy-btn {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 2px 10px;
-    border: 1px solid var(--orange);
-    background: none;
-    color: var(--orange);
-    cursor: pointer;
-    display: none;
-    transition: background 0.15s, color 0.15s;
-  }
-
-  .copy-btn:hover { background: var(--orange); color: #fff; }
-  .copy-btn.copied { background: var(--orange); color: #fff; }
-
-  main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 24px 20px 60px;
-  }
-
-  .section-label {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-lighter);
-    margin-bottom: 16px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--rule);
-  }
-
-  .story {
-    position: relative;
-    padding: 16px 16px 16px 14px;
-    border-left: 3px solid var(--rule);
-    margin-bottom: 0;
-    transition: border 0.15s;
-  }
-
-  .story.used {
-    border: 3px solid var(--orange);
-    padding-left: 13px;
-  }
-
-  .story[data-cat="visual_trends"] { border-left-color: var(--cat-visual-trends); }
-  .story[data-cat="campaigns"] { border-left-color: var(--cat-campaigns); }
-  .story[data-cat="production"] { border-left-color: var(--cat-production); }
-  .story[data-cat="creator_study"] { border-left-color: var(--cat-creator-study); }
-
-  .story.used[data-cat] { border-color: var(--orange); }
-
-  .story-checkbox {
-    position: absolute;
-    top: 14px;
-    right: 14px;
-    width: 15px;
-    height: 15px;
-    cursor: pointer;
-    accent-color: var(--orange);
-  }
-
-  .story-headline {
-    font-family: var(--mono);
-    font-weight: 700;
-    font-size: 14px;
-    line-height: 1.3;
-    margin-bottom: 3px;
-    padding-right: 28px;
-  }
-
-  .story-headline.star::before {
-    content: '★ ';
-    color: var(--orange);
-  }
-
-  .story-headline.star { font-size: 15px; }
-
-  .new-badge {
-    display: inline-block;
-    font-family: var(--mono);
-    font-size: 9px;
-    font-weight: 700;
-    color: var(--orange);
-    border: 1px solid var(--orange);
-    border-radius: 3px;
-    padding: 1px 5px;
-    margin-left: 8px;
-    vertical-align: middle;
-    letter-spacing: 0.5px;
-  }
-
-  .story-headline a {
-    color: var(--ink);
-    text-decoration: none;
-  }
-
-  .story-headline a:hover { text-decoration: underline; }
-
-  .story-meta {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--ink-lighter);
-    margin-bottom: 10px;
-  }
-
-  .story-blurb-en {
-    font-family: var(--serif);
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--ink);
-    margin-bottom: 10px;
-    white-space: pre-line;
-  }
-
-  .story-zh {
-    margin-top: 8px;
-    padding-top: 8px;
-    border-top: 1px solid var(--rule);
-  }
-
-  .story-headline-zh {
-    font-family: var(--mono);
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--ink-light);
-    margin-bottom: 4px;
-  }
-
-  .story-blurb-zh {
-    font-family: var(--serif);
-    font-size: 13px;
-    color: var(--ink-light);
-    line-height: 1.6;
-    white-space: pre-line;
-  }
-
-  .story-rule {
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 0;
-  }
-
-  body.lang-zh .story-headline-primary { order: 2; }
-  body.lang-zh .story-zh { order: 1; border-top: none; border-bottom: 1px solid var(--rule); padding-top: 0; padding-bottom: 8px; margin-top: 0; margin-bottom: 8px; }
-  body.lang-zh .story-en { order: 2; }
-  body.lang-zh .story-zh .story-headline-zh { font-size: 14px; color: var(--ink); font-family: var(--mono); font-weight: 700; }
-  body.lang-zh .story-zh .story-blurb-zh { font-size: 15px; color: var(--ink); }
-  body.lang-zh .story-blurb-en { font-size: 13px; color: var(--ink-light); }
-  body.lang-zh .story-headline { font-size: 12px; color: var(--ink-light); }
-
-  .story-content { display: flex; flex-direction: column; }
-
-  .archive-toggle {
-    font-family: var(--mono);
-    font-size: 11px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--ink-lighter);
-    cursor: pointer;
-    margin: 32px 0 0;
-    padding: 8px 0;
-    border-top: 1px solid var(--rule);
-    border-bottom: 1px solid var(--rule);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    user-select: none;
-  }
-
-  .archive-toggle::before {
-    content: '▶';
-    font-size: 9px;
-    transition: transform 0.2s;
-  }
-
-  .archive-toggle.open::before { transform: rotate(90deg); }
-
-  #archive-stories { display: none; opacity: 0.6; margin-top: 8px; }
-  #archive-stories.open { display: block; }
-
-  footer {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 0 20px 40px;
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--ink-lighter);
-    border-top: 1px solid var(--rule);
-    padding-top: 16px;
-  }
-
-  footer a { color: var(--ink-lighter); }
-
-  .empty-state {
-    font-family: var(--mono);
-    font-size: 13px;
-    color: var(--ink-lighter);
-    padding: 40px 0;
-    text-align: center;
-    line-height: 1.8;
-  }
-
-  .guidance-toggle {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--ink-light);
-    cursor: pointer;
-    user-select: none;
-    padding: 4px 0 0;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .guidance-toggle::before {
-    content: '▶';
-    font-size: 8px;
-    transition: transform 0.2s;
-  }
-
-  .guidance-toggle.open::before { transform: rotate(90deg); }
-
-  .guidance-panel {
-    display: none;
-    margin-top: 8px;
-  }
-
-  .guidance-panel.open { display: block; }
-
-  .guidance-textarea {
-    width: 100%;
-    font-family: var(--serif);
-    font-size: 13px;
-    padding: 8px 10px;
-    border: 1px solid var(--rule);
-    background: #fff;
-    color: var(--ink);
-    resize: vertical;
-    min-height: 60px;
-    max-height: 200px;
-    line-height: 1.5;
-  }
-
-  .guidance-textarea:focus { outline: 1px solid var(--ink-light); border-color: var(--ink-light); }
-
-  .guidance-row {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-top: 6px;
-  }
-
-  .guidance-submit {
-    font-family: var(--mono);
-    font-size: 11px;
-    padding: 4px 14px;
-    border: 1px solid var(--ink);
-    background: none;
-    color: var(--ink);
-    cursor: pointer;
-    white-space: nowrap;
-    transition: background 0.15s, color 0.15s;
-  }
-
-  .guidance-submit:hover { background: var(--ink); color: var(--bg); }
-
-  .guidance-hint {
-    font-family: var(--mono);
-    font-size: 10px;
-    color: var(--ink-lighter);
-  }
-
-  .story.filtered { display: none; }
-
-  @media (max-width: 600px) {
-    header { padding: 10px 14px 8px; }
-    main { padding: 16px 14px 40px; }
-    footer { padding: 16px 14px 30px; }
-    .header-top { gap: 8px; }
-    .site-title { font-size: 13px; }
-    .header-meta { font-size: 10px; gap: 8px; }
-  }
+@media(max-width:600px){
+  .header-inner{padding:14px 16px 12px}
+  main{padding:0 16px}
+  .header-top{flex-direction:column;gap:8px}
+  .meta{padding-top:0}
+  .title{font-size:18px}
+  .card{padding:14px 16px 16px}
+  .hl{font-size:16px}
+  .sug{padding:16px 18px 18px}
+}
 </style>
 </head>
 <body>
+<div style="min-height:100vh;padding-bottom:64px">
 
-<header>
-  <div class="header-top">
-    <span class="site-title">The Prompt Response // ICS</span>
-    <span class="site-subtitle">Industry news for creative studios. Auto-sourced. Human-curated.</span>
-    <div class="header-meta">
-      <span id="story-count">&mdash; stories</span>
-      <span id="last-updated">&mdash;</span>
-      <div class="lang-toggle">
-        <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
-        <button class="lang-btn" data-lang="zh" onclick="setLang('zh')">中文</button>
+  <header class="header">
+    <div class="header-inner">
+      <div class="header-top">
+        <div>
+          <div class="title">Sky's News-o-matic</div>
+          <div class="subtitle">Weekly industry intelligence — Insta360 ICS</div>
+        </div>
+        <div class="meta">
+          <span id="count"></span>
+          <span class="meta-sep">/</span>
+          <span id="updated"></span>
+        </div>
       </div>
+      <div class="pills" id="pills"></div>
     </div>
-  </div>
-  <div class="header-controls">
-    <div class="filter-pills">
-      <span class="pill" data-cat="all" onclick="setFilter('all')">All</span>
-      <span class="pill" data-cat="visual_trends" onclick="setFilter('visual_trends')">Trends</span>
-      <span class="pill" data-cat="campaigns" onclick="setFilter('campaigns')">Campaigns</span>
-      <span class="pill" data-cat="production" onclick="setFilter('production')">Production</span>
-      <span class="pill" data-cat="creator_study" onclick="setFilter('creator_study')">Creators</span>
-    </div>
-    <span class="selected-badge" id="selected-badge">0 selected</span>
-    <button class="copy-btn" id="copy-btn" onclick="copySelectedIds()">Copy IDs</button>
-  </div>
-  <div class="guidance-toggle" id="guidance-toggle" onclick="toggleGuidance()">Guide next search</div>
-  <div class="guidance-panel" id="guidance-panel">
-    <textarea class="guidance-textarea" id="guidance-text" placeholder="e.g. More DJI drone stories. Find GoPro campaign examples. Look for spatial video production techniques."></textarea>
-    <div class="guidance-row">
-      <button class="guidance-submit" onclick="submitGuidance()">Queue guidance &rarr;</button>
-      <span class="guidance-hint">Opens a GitHub issue. The next search run applies it automatically.</span>
-    </div>
-  </div>
-</header>
+  </header>
 
-<main>
-  <div class="section-label" id="this-week-label">This Week</div>
-  <div id="this-week-stories"></div>
+  <main>
+    <section style="margin-top:34px">
+      <div class="sec-head">
+        <h2>This Week</h2>
+        <div class="rule"></div>
+      </div>
+      <div id="week"></div>
+    </section>
 
-  <div class="archive-toggle" id="archive-toggle" onclick="toggleArchive()">Archive</div>
-  <div id="archive-stories"></div>
-</main>
+    <section style="margin-top:40px">
+      <button class="arch-toggle" id="archToggle">
+        <h2>Archive</h2>
+        <span class="arch-n" id="archN"></span>
+        <span class="arch-c" id="archC">▸</span>
+        <div class="rule"></div>
+      </button>
+      <div id="archList" class="arch-list hidden"></div>
+    </section>
 
-<footer>
-  Powered by Claude Code Routines. Built for Insta360 ICS. &nbsp;|&nbsp;
-  <a href="https://github.com/skygidge/SKYS-NEWS-O-MATIC" target="_blank">GitHub</a>
-</footer>
+    <section class="sug">
+      <div class="sug-head">
+        <span>→</span>
+        <h2>Suggestion Box</h2>
+      </div>
+      <p class="sug-desc">What should next week's hunt cover? A company, a trend, a technique — drop it here and it lands in our GitHub.</p>
+      <textarea id="sugTA" class="sug-ta" placeholder="e.g. Track DJI's pricing response to GoPro, or anamorphic looks faked in post on phones..."></textarea>
+      <div class="sug-actions">
+        <button class="sug-btn" id="sugBtn">Send to GitHub →</button>
+        <span class="sug-status" id="sugStatus"></span>
+      </div>
+    </section>
+  </main>
 
+  <footer>
+    <div>Suggestions collected via GitHub Issues · Built for Insta360 ICS</div>
+  </footer>
+
+</div>
 <script>
-  let allStories = [];
-  let currentFilter = 'all';
-  let currentLang = 'en';
-
-  const CAT_LABELS = {
-    visual_trends: 'Emerging Visual Trends',
-    campaigns: 'Interesting Campaigns',
-    production: 'Production Techniques',
-    creator_study: 'Creator Study'
+(function(){
+  var REPO = 'skygidge/SKYS-NEWS-O-MATIC';
+  var CATS = {
+    visual_trends: {label:'Trends', name:'Emerging Visual Trends', color:'#C0492F'},
+    campaigns:     {label:'Campaigns', name:'Interesting Campaigns', color:'#2F6FB0'},
+    production:    {label:'Production', name:'Production Techniques', color:'#2A9D5C'},
+    creator_study: {label:'Creators', name:'Creator Content Worth Studying', color:'#7A4FB0'}
   };
 
-  function formatDate(dateStr) {
-    if (!dateStr) return '';
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return months[m-1] + ' ' + d + ', ' + y;
+  var stories = [];
+  var active = [];
+  var used = {};
+  var seen = [];
+  var archOpen = false;
+
+  try { used = JSON.parse(localStorage.getItem('sky_used') || '{}') || {}; } catch(e){}
+  try { seen = JSON.parse(localStorage.getItem('sky_seen') || '[]') || []; } catch(e){}
+
+  function fmtDate(d) {
+    var m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    var p = String(d).split('-');
+    return m[parseInt(p[1],10)-1] + ' ' + parseInt(p[2],10);
   }
 
-  function daysSince(dateStr) {
-    if (!dateStr) return 999;
-    const [y, m, d] = dateStr.split('-').map(Number);
-    const story = new Date(y, m-1, d);
+  function isThisWeek(s) {
+    var ref = s.date_found || s.added_at;
+    if (!ref) return false;
+    var d = new Date(ref.length === 10 ? ref + 'T00:00:00Z' : ref);
     var now = new Date();
-    return Math.floor((now - story) / 86400000);
+    return (now - d) < 7 * 24 * 60 * 60 * 1000;
   }
 
-  function getUsed(id) { return localStorage.getItem('used_' + id) === '1'; }
-
-  function setUsed(id, val) {
-    if (val) localStorage.setItem('used_' + id, '1');
-    else localStorage.removeItem('used_' + id);
+  function passes(s) {
+    return active.length === 0 || active.indexOf(s.category) !== -1;
   }
 
-  function countSelected() { return allStories.filter(function(s) { return getUsed(s.id); }).length; }
+  function pillStyle(on, color) {
+    if (on) return 'background:' + color + ';color:#fff;border-color:' + color;
+    return '';
+  }
 
-  function updateSelectionUI() {
-    var n = countSelected();
-    var badge = document.getElementById('selected-badge');
-    var btn = document.getElementById('copy-btn');
-    if (n > 0) {
-      badge.style.display = 'inline';
-      badge.textContent = n + ' selected';
-      btn.style.display = 'inline-block';
+  function renderCard(s) {
+    var cat = CATS[s.category] || {name:'Other', color:'#888'};
+    var isUsed = !!used[s.id];
+    var isNew = seen.indexOf(s.id) === -1;
+    var borderColor = isUsed ? '#ff7a00' : cat.color;
+
+    var html = '<article class="card' + (isUsed ? ' used' : '') + '" style="border-left:3px solid ' + borderColor + '">';
+    html += '<div class="card-top"><div class="card-left">';
+    html += '<div class="kicker" style="color:' + cat.color + '">' + esc(cat.name) + '</div>';
+    html += '<a class="hl" href="' + esc(s.source_url) + '" target="_blank" rel="noopener">' + esc(s.headline_en);
+    if (s.editorial_score >= 8) html += ' <span class="star">★</span>';
+    html += '</a>';
+    html += '<div class="src">' + esc(s.source_name) + ' · ' + fmtDate(s.article_date) + '</div>';
+    html += '</div><div class="ctrls">';
+    if (isNew) html += '<span class="new">NEW</span>';
+    html += '<span class="chk' + (isUsed ? ' on' : '') + '" data-id="' + esc(s.id) + '">' + (isUsed ? '✓' : '') + '</span>';
+    html += '</div></div>';
+    html += '<p class="blurb-en">' + esc(s.blurb_en) + '</p>';
+    html += '<p class="blurb-zh">' + esc(s.blurb_zh) + '</p>';
+    html += '<a class="read" href="' + esc(s.source_url) + '" target="_blank" rel="noopener">Read at ' + esc(s.source_name) + ' <span class="arr">→</span></a>';
+    html += '</article>';
+    return html;
+  }
+
+  function esc(s) {
+    if (!s) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function render() {
+    var sorted = stories.slice().sort(function(a,b){
+      var da = a.date_found || a.added_at || '';
+      var db = b.date_found || b.added_at || '';
+      return db.localeCompare(da);
+    });
+
+    var week = sorted.filter(function(s){ return isThisWeek(s) && passes(s); });
+    var arch = sorted.filter(function(s){ return !isThisWeek(s) && passes(s); });
+    var archAll = sorted.filter(function(s){ return !isThisWeek(s); });
+
+    // Count and updated
+    document.getElementById('count').textContent = stories.length + ' stories';
+    var latest = sorted[0];
+    if (latest) {
+      var ref = latest.added_at || latest.date_found;
+      if (ref) document.getElementById('updated').textContent = 'Updated ' + fmtDate(ref.slice(0,10));
+    }
+
+    // Pills
+    var ph = '';
+    var allOn = active.length === 0;
+    ph += '<button class="pill' + (allOn ? ' on' : '') + '" data-cat="all" style="' + pillStyle(allOn, '#1a1a1a') + '">All</button>';
+    var slugs = ['visual_trends','campaigns','production','creator_study'];
+    for (var i = 0; i < slugs.length; i++) {
+      var sl = slugs[i], c = CATS[sl];
+      var on = active.indexOf(sl) !== -1;
+      ph += '<button class="pill' + (on ? ' on' : '') + '" data-cat="' + sl + '" style="' + pillStyle(on, c.color) + '">' + c.label + '</button>';
+    }
+    ph += '<div class="spacer"></div>';
+    var selIds = stories.filter(function(s){ return used[s.id]; });
+    if (selIds.length > 0) {
+      ph += '<div class="sel-bar show"><span class="sel-count">' + selIds.length + ' selected</span>';
+      ph += '<button class="copy-btn" id="copyBtn">Copy IDs</button></div>';
+    }
+    document.getElementById('pills').innerHTML = ph;
+
+    // This week
+    var wh = '';
+    if (week.length === 0) wh = '<div class="empty">No stories this week' + (active.length ? ' in this category' : '') + '.</div>';
+    else for (var j = 0; j < week.length; j++) wh += renderCard(week[j]);
+    document.getElementById('week').innerHTML = wh;
+
+    // Archive
+    document.getElementById('archN').textContent = '(' + archAll.length + ')';
+    document.getElementById('archC').textContent = archOpen ? '▾' : '▸';
+    var al = document.getElementById('archList');
+    if (archOpen) {
+      al.classList.remove('hidden');
+      var ah = '';
+      if (arch.length === 0) ah = '<div class="empty">No archived stories' + (active.length ? ' in this category' : '') + '.</div>';
+      else for (var k = 0; k < arch.length; k++) ah += renderCard(arch[k]);
+      al.innerHTML = ah;
     } else {
-      badge.style.display = 'none';
-      btn.style.display = 'none';
+      al.classList.add('hidden');
     }
   }
 
-  function copySelectedIds() {
-    var ids = allStories.filter(function(s) { return getUsed(s.id); }).map(function(s) { return s.id; }).join(', ');
-    navigator.clipboard.writeText(ids).then(function() {
-      var btn = document.getElementById('copy-btn');
-      btn.textContent = 'Copied!';
-      btn.classList.add('copied');
-      setTimeout(function() { btn.textContent = 'Copy IDs'; btn.classList.remove('copied'); }, 2000);
-    });
-  }
+  // Event delegation
+  document.addEventListener('click', function(e) {
+    var t = e.target;
 
-  function buildCard(story) {
-    var used = getUsed(story.id);
-    var isStar = story.editorial_score >= 8;
-
-    var card = document.createElement('div');
-    card.className = 'story' + (used ? ' used' : '');
-    card.dataset.cat = story.category || 'visual_trends';
-    card.dataset.id = story.id;
-
-    var cb = document.createElement('input');
-    cb.type = 'checkbox';
-    cb.className = 'story-checkbox';
-    cb.checked = used;
-    cb.title = 'Mark as used';
-    cb.addEventListener('change', function() {
-      setUsed(story.id, cb.checked);
-      card.classList.toggle('used', cb.checked);
-      updateSelectionUI();
-    });
-
-    var content = document.createElement('div');
-    content.className = 'story-content';
-
-    var headlineEl = document.createElement('div');
-    headlineEl.className = 'story-headline' + (isStar ? ' star' : '');
-    var a = document.createElement('a');
-    a.href = story.source_url || '#';
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.textContent = story.headline_en || '';
-    headlineEl.appendChild(a);
-    if (window.newStoryIds && window.newStoryIds.has(story.id)) {
-      var badge = document.createElement('span');
-      badge.className = 'new-badge';
-      badge.textContent = 'NEW';
-      headlineEl.appendChild(badge);
-    }
-
-    var meta = document.createElement('div');
-    meta.className = 'story-meta';
-    var catLabel = CAT_LABELS[story.category] || story.category || '';
-    var displayDate = story.article_date || story.date_found;
-    meta.textContent = (story.source_name || '') + (displayDate ? ' — ' + formatDate(displayDate) : '') + (catLabel ? ' · ' + catLabel : '');
-
-    var enDiv = document.createElement('div');
-    enDiv.className = 'story-en';
-    var blurbEn = document.createElement('p');
-    blurbEn.className = 'story-blurb-en';
-    blurbEn.textContent = story.blurb_en || '';
-    enDiv.appendChild(blurbEn);
-
-    var zhDiv = document.createElement('div');
-    zhDiv.className = 'story-zh';
-    var headlineZh = document.createElement('div');
-    headlineZh.className = 'story-headline-zh';
-    headlineZh.textContent = story.headline_zh || '';
-    var blurbZh = document.createElement('p');
-    blurbZh.className = 'story-blurb-zh';
-    blurbZh.textContent = story.blurb_zh || '';
-    zhDiv.appendChild(headlineZh);
-    zhDiv.appendChild(blurbZh);
-
-    content.appendChild(headlineEl);
-    content.appendChild(meta);
-    content.appendChild(enDiv);
-    content.appendChild(zhDiv);
-
-    card.appendChild(cb);
-    card.appendChild(content);
-
-    return card;
-  }
-
-  function renderStories(stories, containerId) {
-    var container = document.getElementById(containerId);
-    container.innerHTML = '';
-
-    if (stories.length === 0) {
-      var empty = document.createElement('div');
-      empty.className = 'empty-state';
-      empty.textContent = containerId === 'this-week-stories'
-        ? 'No stories yet. Run the Routine to fetch the first batch.'
-        : 'No archived stories yet.';
-      container.appendChild(empty);
+    // Pills
+    if (t.classList.contains('pill')) {
+      var cat = t.getAttribute('data-cat');
+      if (cat === 'all') active = [];
+      else {
+        var idx = active.indexOf(cat);
+        if (idx !== -1) active.splice(idx, 1);
+        else active.push(cat);
+      }
+      render();
       return;
     }
 
-    stories.forEach(function(story, i) {
-      var card = buildCard(story);
-      container.appendChild(card);
-      if (i < stories.length - 1) {
-        var hr = document.createElement('hr');
-        hr.className = 'story-rule';
-        container.appendChild(hr);
-      }
-    });
-  }
-
-  function applyFilter() {
-    document.querySelectorAll('.story').forEach(function(card) {
-      if (currentFilter === 'all' || card.dataset.cat === currentFilter) {
-        card.classList.remove('filtered');
-      } else {
-        card.classList.add('filtered');
-      }
-    });
-
-    document.querySelectorAll('.pill').forEach(function(p) {
-      p.classList.toggle('inactive', p.dataset.cat !== currentFilter);
-    });
-  }
-
-  function setFilter(cat) { currentFilter = cat; applyFilter(); }
-
-  function setLang(lang) {
-    currentLang = lang;
-    document.body.classList.toggle('lang-zh', lang === 'zh');
-    document.querySelectorAll('.lang-btn').forEach(function(b) { b.classList.toggle('active', b.dataset.lang === lang); });
-  }
-
-  function toggleArchive() {
-    document.getElementById('archive-toggle').classList.toggle('open');
-    document.getElementById('archive-stories').classList.toggle('open');
-  }
-
-  function toggleGuidance() {
-    document.getElementById('guidance-toggle').classList.toggle('open');
-    document.getElementById('guidance-panel').classList.toggle('open');
-  }
-
-  function submitGuidance() {
-    var text = document.getElementById('guidance-text').value.trim();
-    if (!text) return;
-    var url = 'https://github.com/skygidge/SKYS-NEWS-O-MATIC/issues/new?title='
-      + encodeURIComponent('Guidance') + '&body=' + encodeURIComponent(text);
-    window.open(url, '_blank');
-  }
-
-  function getLastUpdated(stories) {
-    if (!stories.length) return null;
-    var dates = stories.map(function(s) { return s.date_found; }).filter(Boolean).sort().reverse();
-    return dates[0] || null;
-  }
-
-  function toPacketTime(dateStr) {
-    if (!dateStr) return '—';
-    var parts = dateStr.split('-').map(Number);
-    var dt = new Date(parts[0], parts[1]-1, parts[2]);
-    return dt.toLocaleDateString('en-US', { timeZone: 'America/Los_Angeles', month: 'short', day: 'numeric', year: 'numeric' });
-  }
-
-  async function init() {
-    try {
-      var res = await fetch('./all_stories.json?v=' + Date.now());
-      allStories = await res.json();
-    } catch (e) {
-      allStories = [];
+    // Checkboxes
+    if (t.classList.contains('chk')) {
+      var id = t.getAttribute('data-id');
+      if (used[id]) delete used[id];
+      else used[id] = true;
+      try { localStorage.setItem('sky_used', JSON.stringify(used)); } catch(e){}
+      render();
+      return;
     }
 
-    var knownRaw = localStorage.getItem('known_stories_ics');
-    var knownIds;
-    try { knownIds = knownRaw ? new Set(JSON.parse(knownRaw)) : new Set(); }
-    catch (e) { knownIds = new Set(); }
-    window.newStoryIds = new Set(allStories.filter(function(s) { return !knownIds.has(s.id); }).map(function(s) { return s.id; }));
-
-    function sortKey(s) {
-      return s.added_at || (s.date_found ? s.date_found + 'T00:00:00Z' : '');
+    // Copy IDs
+    if (t.id === 'copyBtn' || (t.parentElement && t.parentElement.id === 'copyBtn')) {
+      var ids = stories.filter(function(s){ return used[s.id]; }).map(function(s){ return s.id; });
+      try { navigator.clipboard.writeText(ids.join('\n')); } catch(e){}
+      var btn = document.getElementById('copyBtn');
+      if (btn) { btn.textContent = 'Copied'; setTimeout(function(){ btn.textContent = 'Copy IDs'; }, 1600); }
+      return;
     }
-    var sortByAdded = function(a, b) { return sortKey(b).localeCompare(sortKey(a)) || (b.editorial_score || 0) - (a.editorial_score || 0); };
-    var thisWeek = allStories.filter(function(s) { return daysSince(s.date_found) <= 7; }).sort(sortByAdded);
-    var archive = allStories.filter(function(s) { return daysSince(s.date_found) > 7; }).sort(sortByAdded);
 
-    renderStories(thisWeek, 'this-week-stories');
-
-    if (allStories.length > 0) {
-      var merged = [].concat(knownRaw ? JSON.parse(knownRaw) : [], allStories.map(function(s) { return s.id; }));
-      localStorage.setItem('known_stories_ics', JSON.stringify([...new Set(merged)]));
+    // Archive toggle
+    var at = document.getElementById('archToggle');
+    if (at && at.contains(t)) {
+      archOpen = !archOpen;
+      render();
+      return;
     }
-    renderStories(archive, 'archive-stories');
+  });
 
-    document.getElementById('story-count').textContent = allStories.length + ' stor' + (allStories.length === 1 ? 'y' : 'ies');
+  // Suggestion box
+  document.getElementById('sugBtn').addEventListener('click', function() {
+    var ta = document.getElementById('sugTA');
+    var txt = (ta.value || '').trim();
+    if (!txt) {
+      document.getElementById('sugStatus').textContent = 'Type a suggestion first.';
+      return;
+    }
+    var url = 'https://github.com/' + REPO + '/issues/new?labels=topic-suggestion&title=' +
+      encodeURIComponent('[Suggestion] ' + txt.slice(0,60)) + '&body=' + encodeURIComponent(txt);
+    window.open(url, '_blank', 'noopener');
+    ta.value = '';
+    document.getElementById('sugStatus').textContent = 'Opened a prefilled GitHub issue — submit it there →';
+  });
 
-    var lastDate = getLastUpdated(allStories);
-    document.getElementById('last-updated').textContent = lastDate ? 'Updated ' + toPacketTime(lastDate) : 'No runs yet';
-
-    updateSelectionUI();
-    applyFilter();
-  }
-
-  init();
+  // Fetch data and render
+  fetch('all_stories.json')
+    .then(function(r){ return r.ok ? r.json() : []; })
+    .then(function(data){
+      stories = Array.isArray(data) ? data : [];
+      // Mark all current as seen, track new
+      var ids = stories.map(function(s){ return s.id; });
+      try { localStorage.setItem('sky_seen', JSON.stringify(ids)); } catch(e){}
+      // seen stays as the PREVIOUS visit's list for NEW badge calculation
+      render();
+    })
+    .catch(function(){
+      document.getElementById('week').innerHTML = '<div class="empty">Could not load stories.</div>';
+    });
+})();
 </script>
 </body>
 </html>
