@@ -1,6 +1,6 @@
 {
-  "last_run": "2026-06-25",
-  "total_runs": 3,
+  "last_run": "2026-07-02",
+  "total_runs": 4,
   "queries_that_produced_results": [
     "DJI new product drone camera launch June 2026",
     "DJI patent lawsuit Insta360 Luna Ultra 2026",
@@ -26,7 +26,15 @@
     "compact camera sales surge CIPA 2026",
     "adidas Original Forever Oasis Cannes Lions Grand Prix 2026",
     "Nothing Phone 4b design revealed camera June 2026",
-    "Cannes Lions 2026 award winners campaign video"
+    "Cannes Lions 2026 award winners campaign video",
+    "DJI enterprise drone July 8 2026 announcement",
+    "GoPro MAX2 firmware update June 2026",
+    "CazéTV Casimiro YouTube World Cup 2026 record",
+    "FIFA World Cup 2026 RefCam referee camera broadcast technology",
+    "YouTube Shorts removes dislike count June 2026",
+    "KitKat stolen 413000 bars tracker campaign Cannes 2026",
+    "Charli XCX Rock Music glitch edit trend TikTok viral 2026",
+    "Cannes Lions 2026 winners brand campaign creative technology"
   ],
   "queries_that_produced_nothing": [
     "brand UGC campaign action camera creator 2026 -- only generic UGC platform articles",
@@ -38,7 +46,10 @@
     "Nothing Phone 4a campaign June 2026 -- launched March 2026, no fresh angle this week",
     "MKBHD Peter McKinnon Casey Neistat new video June 2026 -- no fresh individual creator stories in 14-day window",
     "YouTube creator monetization new feature June 2026 -- only minor updates, nothing story-worthy",
-    "TikTok creator fund program change June 2026 -- no fresh program changes in window"
+    "TikTok creator fund program change June 2026 -- no fresh program changes in window",
+    "MKBHD Peter McKinnon Casey Neistat new video June July 2026 -- still no specific creator projects in 14-day window",
+    "Apple Vision Pro 2 July 2026 -- delayed to 2028-2029, no fresh news",
+    "Insta360 X6 specs confirmed 2026 -- still unconfirmed rumors, no official announcement"
   ],
   "best_source_domains": [
     "petapixel.com",
@@ -54,7 +65,11 @@
     "adweek.com",
     "canneslions.com",
     "9to5google.com",
-    "newsshooter.com"
+    "newsshooter.com",
+    "chromeunboxed.com",
+    "streamscharts.com",
+    "techradar.com",
+    "mediapost.com"
   ],
   "discovered_newsletters": [],
   "discovered_sources": [
@@ -68,7 +83,11 @@
     "Newsshooter (newsshooter.com) -- strong gimbal camera and production gear coverage",
     "Adweek -- reliable Cannes Lions and brand campaign coverage",
     "Campaign US / Campaign Live -- Cannes Lions live coverage and winner rankings",
-    "SHOOTonline -- Cannes Lions and advertising industry awards coverage"
+    "SHOOTonline -- Cannes Lions and advertising industry awards coverage",
+    "Streams Charts (streamscharts.com) -- live streaming viewership data and records",
+    "SVG Europe -- sports broadcast technology coverage",
+    "Inside FIFA (inside.fifa.com) -- official FIFA technology and innovation updates",
+    "SocialPilot -- TikTok and social media trend tracking with creator angle"
   ],
   "patterns": [
     "DJI vs Insta360 patent war is a major ongoing story -- watch for court updates, injunction decisions",
@@ -90,12 +109,21 @@
     "PetaPixel and DroneDJ are the most reliable sources for action/drone camera news with editorial angle",
     "WebFetch returns 403 on ALL URLs in this environment -- rely on search result summaries and YouTube thumbnails/Wikimedia for images",
     "Creator_study stories are consistently hard to find at quality threshold -- try searching platform announcements and specific creator projects",
-    "Cannes Lions 2026 Day 2 (June 23) announced Entertainment and Craft Lions -- check remaining days for more campaign stories"
+    "Cannes Lions 2026 Day 2 (June 23) announced Entertainment and Craft Lions -- check remaining days for more campaign stories",
+    "FIFA World Cup 2026 (June 11 - July 19) is driving multiple story types: broadcast tech (45 cameras, RefCam), creator records (CazéTV), visual trends (referee POV footage)",
+    "CazéTV/Casimiro model of free YouTube sports broadcasting is a paradigm-shifting creator story -- watch for other sports/events adopting similar model",
+    "DJI enterprise drone teaser July 8 -- follow up next run for actual product reveal details",
+    "DJI Osmo 360 II FCC filing from Dec 2025 suggests second-gen 360 camera coming -- watch for launch announcement",
+    "GoPro MAX2 firmware updates show continued 360 camera investment despite company financial trouble",
+    "YouTube Shorts UI redesign (dislike removal, heart icon) is a significant platform shift -- watch creator response",
+    "Apple Vision Pro 2 delayed to 2028-2029 -- spatial video hardware updates will be slow",
+    "Insta360 X6 rumors circulating but no official confirmation yet -- watch for announcement"
   ],
   "feedback": [
     "Initial run. Focus on finding strong stories across all 4 categories. Prioritize visual trends and interesting campaigns. Include production technique stories that would interest camera/imaging professionals.",
     "First run completed June 22, 2026. 12 stories seeded across all 4 categories. Top stories: DJI Pocket 4P launch and DJI vs Insta360 patent war (both score 9). Freshest stories are within the 14-day window. Several stories included as first-run seeds despite being older (GoPro MISSION 1, DJI Avata 360, visionOS 26).",
     "Second run completed June 23, 2026. 6 stories found across production (4) and visual_trends (2). No campaigns or creator_study stories found at sufficient quality. GoPro going-concern is top story (score 9). Next run should explicitly search creator campaign angles.",
-    "Third run completed June 25, 2026. 6 stories found across production (2), campaigns (3), and visual_trends (1). Campaigns gap from prior runs now filled with Cannes Lions 2026 coverage and Insta360 Hello Kitty collab. Top story: Xtra Muse 2 Pro / DJI Pocket 4P rebrand (score 8). Creator_study remains hard to fill -- no fresh platform-specific stories in 14-day window. Next run: check Cannes Lions final-day winners, GoPro sale progress, DJI shell company developments."
+    "Third run completed June 25, 2026. 6 stories found across production (2), campaigns (3), and visual_trends (1). Campaigns gap from prior runs now filled with Cannes Lions 2026 coverage and Insta360 Hello Kitty collab. Top story: Xtra Muse 2 Pro / DJI Pocket 4P rebrand (score 8). Creator_study remains hard to fill -- no fresh platform-specific stories in 14-day window. Next run: check Cannes Lions final-day winners, GoPro sale progress, DJI shell company developments.",
+    "Fourth run completed July 2, 2026. 7 stories found across all 4 categories (3 production, 2 creator_study, 1 campaigns, 1 visual_trends). Top story: CazéTV 21M concurrent viewers (score 8). World Cup driving multiple story types. Creator_study gap finally filled with CazéTV record and YouTube Shorts UI change. Next run: follow up DJI enterprise drone reveal (July 8), Nothing Phone 4b launch (July 7), check GoPro sale progress, World Cup visual trend stories."
   ]
 }
